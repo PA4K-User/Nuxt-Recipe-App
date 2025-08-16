@@ -1,5 +1,11 @@
+<script setup lang="ts">
+  import { NuxtPage } from '#components';
+</script>
+
 <template>
-  <div class="font-Montserrat container">
-    <h1 class="text-4xl font-bold text-blue-500 p-4">Hello World</h1>
+  <div class="font-Montserrat bg-black text-white">
+    <NuxtLayout>
+      <NuxtPage/>
+    </NuxtLayout>
   </div>
 </template>
