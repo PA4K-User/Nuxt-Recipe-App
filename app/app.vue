@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class="font-Montserrat bg-black text-white">
+  <div class="font-Montserrat">
     <NuxtLayout>
       <NuxtPage/>
     </NuxtLayout>
