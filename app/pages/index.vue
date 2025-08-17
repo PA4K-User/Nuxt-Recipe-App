@@ -1,13 +1,26 @@
 <script setup lang="ts">
 import { NuxtImg } from '#components';
+import { type RecipeResponse } from '../../types/types';
 
-/* definePageMeta({
-    layout: 'default',
-}) */
+const { data, error } = await useFetch<RecipeResponse>('https://dummyjson.com/recipes?limit=12');
+
+useSeoMeta({
+  title: "Nuxtcipes",
+  description: "Recipes for you to cook!",
+  ogTitle: "Nuxtcipes",
+  ogDescription: "Recipes for you to cook!",
+  ogImage: "/nuxt-course-hero.png",
+  ogUrl: `http:localhost:3000`,
+  twitterTitle: "Nuxtcipes",
+  twitterDescription: "Recipes for you to cook!",
+  twitterImage: "/nuxt-course-hero.png",
+  twitterCard: "summary",
+});
+
 </script>
 <template>
      <main>
-            <section class="bg-black">
+            <section class="bg-white">
                 <div class="container flex flex-col lg:flex-row items-center py-20 gap-10">
                     <div class="flex-1 order-2 lg:order-1 text-center lg:text-left">
                         <h1 class="text-4xl lg:text-6xl font-extrabold mb-6 text-balance">
@@ -16,7 +29,7 @@ import { NuxtImg } from '#components';
                         <p class="text-xl lg:text-2xl mb-8 text-balance">
                             Discover recipes helping you to find the easiest way to cook.
                         </p>
-                        <button class="px-4 py-2 text-black font-bold self-start bg-dodgeroll-gold-300 rounded-md text-lg cursor-pointer">
+                        <button class="px-4 py-2 text-white font-bold self-start bg-dodgeroll-gold-300 rounded-md text-lg cursor-pointer">
                             Browse Recipes
                         </button>
                     </div>
@@ -24,6 +37,14 @@ import { NuxtImg } from '#components';
                         <NuxtImg sizes="xs:100vw sm:667px" src="/nuxt-course-hero.png" format="webp" densities="x1" alt="" />
                     </div>
                 </div>
+            </section>
+             <section id="recipes" class="py-20 container">
+                <h2 class="text-3xl lg:text-5xl mb-2">Discover, Create, Share</h2>
+                <p class="text-lg lg:text-xl mb-8">Check out our most popular recipes!</p>
+                <div v-if="!error" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8">
+                    <RecipeCard v-for="recipe in data?.recipes" :recipe="recipe" />
+                </div>
+                <p v-else class="text-xl">Opps, something went wrong. Please try again later</p>
             </section>
         </main>
 </template>
